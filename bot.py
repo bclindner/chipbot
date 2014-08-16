@@ -220,8 +220,10 @@ def helpMessage(sender):
     sendTo(sender, response)
 
 def anonSay(message):
-    print message
     sendTo(args.channel, message)
+
+def anonDo(message):
+    s.send(bytes("PRIVMSG %s ACTION %s\r\n" % (args.channel, message.encode("UTF-8"))))
 
 # depends on git pull in shell while loop
 def updateBamboo():
@@ -515,6 +517,9 @@ while 1:
            
                 elif func == "say" and modflag and arglist != []:
                     anonSay(' '.join(arglist))
+
+                elif func == "action" and modflag and arglist != []:
+                    anonDo(' '.join(arglist))
 
                 elif func == "source" and modflag:
                     anonSay("https://github.com/Breilly38/chipbot.git")
