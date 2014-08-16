@@ -215,6 +215,10 @@ def politelyDoNotEngage(sender):
     response = "[AUTO REPLY] I am not a human, apologies for any confusion."
     sendTo(sender, response)
 
+def helpMessage(sender):
+    response = "README can be found here: https://github.com/Breilly38/chipbot"
+    sendTo(sender, response)
+
 def anonSay(message):
     print message
     sendTo(args.channel, message)
@@ -515,6 +519,9 @@ while 1:
                 elif func == "source" and modflag:
                     anonSay("https://github.com/Breilly38/chipbot.git")
             
+                elif func == "help":
+                    helpMessage(sender)
+                    
                 else:
                     politelyDoNotEngage(sender)
                 continue
