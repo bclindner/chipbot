@@ -513,7 +513,7 @@ while 1:
                     anonSay(' '.join(arglist))
 
                 elif func == "source" and modflag:
-                    anonSay("https://github.com/Breilly38/bamboo/tree/chipbot")
+                    anonSay("https://github.com/Breilly38/chipbot.git")
             
                 else:
                     politelyDoNotEngage(sender)

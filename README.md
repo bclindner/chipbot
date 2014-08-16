@@ -1,28 +1,27 @@
-## Bamboo
+## Chipbot
 
-Bamboo is an IRC bot that tracks karma of users.
-
-It is currently named after the nearby [bamboo restaurant](http://www.yelp.com/biz/bamboo-fine-asian-cuisine-westford), which contrasts with the also nearby [karma restaurant](http://karmawestford.com/).
+Chipbot is an IRC bot that tracks karma of users.
 
 Chipbot is an offshoot of Bamboo. Original Bamboo source can be found [here](https://github.com/vgmoose/bamboo).
 
 ### Debugging
 
-To run Bamboo in debug mode, the following syntax is recommended:
+To run Chipbot in debug mode, the following syntax is recommended:
 ```
 python bot.py -n "uniqueusername" -c "#uniquechannel" -d
 ```
 
 And the bot will join #uniquechannel as uniqueusername on freenode. All messages received will be printed to the terminal.
 
-The ```argparse``` module will also be required, which can be installed via pip:
+The ```argparse``` and ```pattern``` modules will also be required, which can be installed via pip:
 ```
 pip install argparse
+pip install pattern
 ```
 
 ### Contributing
 
-All pull requests for anything at all are welcome. Bamboo is the product of its creators. To increase the likelihood of your branch being merged, please try to ensure that it is based off master, and GitHub gives it the "ready to merge" status.
+All pull requests for anything at all are welcome. Chipbot is the product of its creators. To increase the likelihood of your branch being merged, please try to ensure that it is based off master, and GitHub gives it the "ready to merge" status.
 
 
 ### Functionality
@@ -42,6 +41,13 @@ Incrementing Points (Phrase)
 
 *result: "any arbitrary words" will get +1 point*
 
+Incrementing Karma/Points (Inline)
+- any++ arbitrary++ [user]++
+
+*result: "any" will get +1 point*
+*result: "arbitrary" will get +1 point*
+*result: [user] will get +1 karma*
+
 Checking karma/points rank
 - rank [user]
 - [user]~~
@@ -55,8 +61,9 @@ Stats are kept track of for each user that sends messages to the channel. That i
 
 Checking stats
 - stats
+- stats [user]
 
-*result: information about the top 5 speakers in the channel*
+*result: information about the top 5 speakers in the channel, or information on specific user*
 
 #### Quality
 
@@ -64,6 +71,7 @@ Quality is calculated by dividing the number of times a user speaks by their ran
 
 Checking quality
 - quality
+- quality [user]
 
 #### Generosity
 
@@ -71,11 +79,25 @@ Generosity tracks which users are giving the most karma using the ++ commands. E
 
 Checking generosity
 - generosity
+- generosity [user]
 
 #### Scrambling username
 
 Sometimes it is annoying to be mentioned in the above "leaderboard" style commands. The following command is a workaround that will "scramble" one's username so that they won't be notified in IRC.
 
 - bamboo: scramble
+
+#### Searching
+
+Chipbot is able to search a few different sites, including xkcd, youtube, and bandcamp. It will report the top result, including a link, to the channel. More can be added if requested.
+
+Search youtube
+- .yt [search terms]
+
+Search xkcd
+- .xkcd [search terms]
+
+Search bandcamp
+- .bc [search terms]
 
 
