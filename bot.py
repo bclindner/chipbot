@@ -223,7 +223,7 @@ def anonSay(message):
     sendTo(args.channel, message)
 
 def anonDo(message):
-    sendTo(args.channel, "ACTION " + message)
+    s.send('PRIVMSG ' + args.channel + ' :\x01ACTION ' + message + '\x01\n')
 
 # depends on git pull in shell while loop
 def updateBamboo():
