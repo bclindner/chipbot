@@ -170,7 +170,7 @@ def getStats(subject):
     if subject in stats:
         return stats[subject]
     else:
-        return
+         return
 
 def setGenerosity(subject, netgain):
     subject = subject.lower()
@@ -331,7 +331,7 @@ def computeResponse(sender, message, channel):
                 return "%s has never used karma" % subject            
 
         # can't give yourself karma
-        if subject == sender and symbol != "~~":
+        if subject.lower() == sender.lower() and symbol != "~~":
             return
         
         # if it's a user, give them karma, else give points to the phrase
@@ -452,6 +452,9 @@ def computeResponse(sender, message, channel):
         
     elif func == ".sc":
         return soundcloud(message[3:]) 
+
+    elif func == ".meow":
+        return "https://soundcloud.com/anamanaguchi/meow-1"
 
     elif message[:len(args.nick)+10] == args.nick+": scramble":
         toggleScrambles(sender)
