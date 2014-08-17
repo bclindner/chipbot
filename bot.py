@@ -250,6 +250,14 @@ def bandcamp(searchTerm):
             if "bandcamp.com" in result.url:
                 return result.title + " " + result.url
 
+def soundcloud(searchTerm):
+    if searchTerm != "":
+        g = Google()
+        for result in g.search("souncloud"+searchTerm):
+            if "soundcloud.com" in result.url:
+                return result.title + " " + result.url
+
+
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel):
     global args
@@ -442,6 +450,9 @@ def computeResponse(sender, message, channel):
     elif func == ".bc":
         return bandcamp(message[3:])
         
+    elif func == ".sc":
+        return soundcloud(message[3:]) 
+
     elif message[:len(args.nick)+10] == args.nick+": scramble":
         toggleScrambles(sender)
         return sender + " is now known as %s%s" % scramble((sender,""))
