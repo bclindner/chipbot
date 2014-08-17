@@ -100,4 +100,5 @@ Search xkcd
 Search bandcamp
 - .bc [search terms]
 
-
+Search soundcloud
+- .sc [search terms]
