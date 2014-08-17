@@ -232,28 +232,28 @@ def updateBamboo():
 def xkcd(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("xkcd"+searchTerm):
+        for result in g.search("xkcd "+searchTerm):
             if "http://xkcd.com/" in result.url:
                 return result.url
 
 def youtube(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("youtube"+searchTerm):
+        for result in g.search("youtube "+searchTerm):
             if "http://www.youtube.com/watch" in result.url:
                 return result.title + " " + result.url
 
 def bandcamp(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("bandcamp"+searchTerm):
+        for result in g.search("bandcamp "+searchTerm):
             if "bandcamp.com" in result.url:
                 return result.title + " " + result.url
 
 def soundcloud(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("soundcloud"+searchTerm):
+        for result in g.search("soundcloud "+searchTerm):
             if "soundcloud.com" in result.url:
                 return result.title + " " + result.url
 
