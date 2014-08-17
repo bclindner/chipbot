@@ -253,7 +253,7 @@ def bandcamp(searchTerm):
 def soundcloud(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("souncloud"+searchTerm):
+        for result in g.search("soundcloud"+searchTerm):
             if "soundcloud.com" in result.url:
                 return result.title + " " + result.url
 
