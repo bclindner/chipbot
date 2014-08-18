@@ -102,3 +102,14 @@ Search bandcamp
 
 Search soundcloud
 - .sc [search terms]
+
+#### Quoting
+
+Chipbot is able to remember single-line quotes.
+
+Add a quote:
+- .quote [quote]
+
+Post a quote:
+- .getquote (random)
+- .getquote [# of quote]

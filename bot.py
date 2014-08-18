@@ -33,6 +33,7 @@ import ssl
 from pattern.web import *
 import re
 import time
+import random
 
 parser = argparse.ArgumentParser(description="Bamboo argument parsing")
 parser.add_argument("-s", "--server", nargs='?', default="warden.esper.net")
@@ -73,17 +74,9 @@ generous = loadData(args.generousfile)
 scrambleTracker = loadData(args.scramblefile)
 
 with open(args.quotefile) as f:
-    appendFlag = True
     for line in f:
-        if appendFlag:
-            quotes.append(line)
-            appendFlag = False
-        if line == ";;;\n":
-            appendFlag = True
-            continue
-        else:
-            quotes[len(quotes)-1] += line
-
+        quotes.append(line)
+ 
 with open(args.userfile) as f:
     for line in f:
         currentusers.append(line[:-1])
@@ -241,9 +234,17 @@ def helpMessage(sender):
     sendTo(sender, response)
 
 def quoteMessage(sender, message):
-    quotes.append(message + '\n;;;\n')
 
-    reponse = "Quote #" + (len(quotes) - 1) + " added by " + sender
+    if message == "" or message.split(' ') == []:
+        return
+
+    message = message[1:]
+    quotes.append(message)
+
+    with open(args.quotefile, 'a') as f:
+        f.write(quotes[len(quotes)-1] + '\n')
+
+    response = "Quote #" + str(len(quotes)) + " added by " + sender
     sendTo(args.channel, response) 
 
 def anonSay(message):
@@ -284,6 +285,13 @@ def soundcloud(searchTerm):
             if "soundcloud.com" in result.url:
                 return result.title + " " + result.url
 
+def specificQuote(num):
+    n = int(num) - 1
+    if len(quotes) > n:
+        return quotes[n]
+
+def randomQuote():
+    return quotes[random.randint(0, len(quotes)-1)]
 
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel):
@@ -483,6 +491,15 @@ def computeResponse(sender, message, channel):
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
 
+    elif func == ".quote":
+        return quoteMessage(sender, message[6:])
+
+    elif func == ".getquote":
+        spltmsg = message.split(' ')
+        if len(spltmsg) > 1:
+            return specificQuote(spltmsg[1])
+        return randomQuote()
+
     elif message[:len(args.nick)+10] == args.nick+": scramble":
         toggleScrambles(sender)
         return sender + " is now known as %s%s" % scramble((sender,""))
@@ -577,7 +594,7 @@ while 1:
                 elif func == "help":
                     helpMessage(sender)
                     
-                elif func == "quote":
+                elif func == "quote" and arglist !=[]:
                     quoteMessage(sender, ' '.join(arglist))
                     
                 else:
