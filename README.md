@@ -1,6 +1,6 @@
 ## Chipbot
 
-Chipbot is an IRC bot that tracks karma of users.
+Chipbot is an IRC bot that tracks karma of users. Karma is a stat tracked just for fun - if you see someone say something funny or interesting, "++" them! You can also "--" if you're feeling salty...
 
 Chipbot is an offshoot of Bamboo. Original Bamboo source can be found [here](https://github.com/vgmoose/bamboo).
 
