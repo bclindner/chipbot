@@ -85,7 +85,7 @@ Checking generosity
 
 Sometimes it is annoying to be mentioned in the above "leaderboard" style commands. The following command is a workaround that will "scramble" one's username so that they won't be notified in IRC.
 
-- bamboo: scramble
+- chipbot: scramble
 
 #### Searching
 
