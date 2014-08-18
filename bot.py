@@ -502,8 +502,8 @@ def computeResponse(sender, message, channel):
         return randomQuote()
 
     elif message[:len(args.nick)+10] == args.nick+": scramble":
-        toggleScrambles(sender)
-        return sender + " is now known as %s%s" % scramble((sender,""))
+        toggleScrambles(sender.lower())
+        return sender.lower() + " is now known as %s%s" % scramble((sender.lower(),""))
 
 while 1:
     # read in lines from the socket
