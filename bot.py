@@ -243,7 +243,7 @@ def helpMessage(sender):
 def quoteMessage(sender, message):
     quotes.append(message + '\n;;;\n')
 
-    reponse = "Quote #" + (len(quotes - 1)) + " added by " + sender
+    reponse = "Quote #" + (len(quotes) - 1) + " added by " + sender
     sendTo(args.channel, response) 
 
 def anonSay(message):
