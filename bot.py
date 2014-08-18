@@ -161,7 +161,7 @@ def getPoints(subject):
         return
 
 def toggleScrambles(subject):
-    if subject.lower() in scrambleTracker:
+    if subject in scrambleTracker:
         scrambleTracker[subject] = not scrambleTracker[subject]
     else:
         scrambleTracker[subject] = False
@@ -217,7 +217,7 @@ def getQuality(subject, stats, karma):
     return 0
 
 def scramble(tup):
-    subject = tup[0].lower()
+    subject = tup[0]
     if subject not in scrambleTracker or scrambleTracker[subject]:
         return (subject, tup[1])
     else:
