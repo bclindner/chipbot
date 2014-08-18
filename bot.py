@@ -46,6 +46,7 @@ parser.add_argument("-a", "--statsfile", nargs='?', default=".stats")
 parser.add_argument("-z", "--scramblefile", nargs='?', default=".scrambles")
 parser.add_argument("-d", "--debug", action="store_true")
 parser.add_argument("-g", "--generousfile", nargs='?', default=".generous")
+parser.add_argument("-g", "--userfile", nargs='?', default=".users")
 parser.add_argument("-m", "--modfile", nargs='?', default=".mods")
 parser.add_argument("-t", "--tls", action="store_true", default=False)
 parser.add_argument("--password", nargs='?')
@@ -53,6 +54,7 @@ args = parser.parse_args(sys.argv[1:])
 
 readbuffer = ""
 currentusers = []
+mods = []
 shared_source = False
 
 def loadData(object):
@@ -68,8 +70,13 @@ stats = loadData(args.statsfile)
 generous = loadData(args.generousfile)
 scrambleTracker = loadData(args.scramblefile)
 
+with open(args.userfile) as f:
+    for line in f:
+    currentusers.append(line[:-1])
+
 with open(args.modfile) as f:
-    mods = f.readlines()
+    for line in f:
+        mods.append(line[:-1]) 
 
 # connect to the server
 s = socket.socket()
@@ -479,14 +486,18 @@ while 1:
             s.send(bytes("PONG %s\r\n" % line[1]))
     
         # 353 = initial list of users in channel
-        elif line[1] == "353":
-            currentusers = [args.nick]
+        elif line[1] == "353" :
+            if not args.nick in currentusers:
+                currentusers.append(args.nick)
             newusers = line[6:]
             for u in newusers:
                 u = u.lstrip("@").lstrip(":").lower()
                 if u[0] == "+":
                     u = u[1:]
-                currentusers.append(u)
+                if not u in currentusers:
+                    currentusers.append(u)
+                    with open(args.userfile, 'a') as f:
+                        f.write(u + '\n')
         
         # update list of users when a nick is changed
         elif line[1] == "NICK":
@@ -494,8 +505,10 @@ while 1:
                 u = line[2].lstrip("@").lstrip(":").lower()
                 if u[0] == "+":
                     u = u[1:] 
-                currentusers.append(u)
-               
+                if not u in currentusers:
+                    currentusers.append(u)
+                    with open(args.userfile, 'a') as f:
+                        f.write(u + '\n')
         elif line[1] == "433":
             args.nick = line[2]
 
@@ -503,7 +516,12 @@ while 1:
         elif line[1] == "JOIN":
             sender = parseSender(line)
             if not sender in currentusers:
-                currentusers.append(parseSender(line).lstrip("@").lstrip(":").lower())
+                u = parseSender(line).lstrip("@").lstrip(":").lower()
+                if not u in currentusers:
+                    currentusers.append(u)
+                    with open(args.userfile, 'a') as f:
+                        f.write(u + '\n')
+                
         
         # this if statement responds to received messages
         elif line[1] == "PRIVMSG":
@@ -521,11 +539,9 @@ while 1:
                 arglist = splitmsg[1:]
                 
                 
-                for m in mods:
-                    if (sender + '\n') == m:
-                        modflag = True
-                        break
-                
+                if sender in mods:
+                    modflag = True
+                    
                 if func == "update" and modflag:
                     updateBamboo()        
            
