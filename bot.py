@@ -217,7 +217,7 @@ def getQuality(subject, stats, karma):
     return 0
 
 def scramble(tup):
-    subject = tup[0]
+    subject = tup[0].lower()
     if subject not in scrambleTracker or scrambleTracker[subject]:
         return (subject, tup[1])
     else:
