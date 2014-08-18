@@ -161,7 +161,7 @@ def getPoints(subject):
         return
 
 def toggleScrambles(subject):
-    if subject in scrambleTracker:
+    if subject.lower() in scrambleTracker:
         scrambleTracker[subject] = not scrambleTracker[subject]
     else:
         scrambleTracker[subject] = False
@@ -501,7 +501,7 @@ def computeResponse(sender, message, channel):
         return randomQuote()
 
     elif message[:len(args.nick)+10] == args.nick+": scramble":
-        toggleScrambles(sender)
+        toggleScrambles(sender.lower())
         return sender + " is now known as %s%s" % scramble((sender,""))
 
 while 1:
