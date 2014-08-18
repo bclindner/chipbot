@@ -46,7 +46,8 @@ parser.add_argument("-a", "--statsfile", nargs='?', default=".stats")
 parser.add_argument("-z", "--scramblefile", nargs='?', default=".scrambles")
 parser.add_argument("-d", "--debug", action="store_true")
 parser.add_argument("-g", "--generousfile", nargs='?', default=".generous")
-parser.add_argument("-g", "--userfile", nargs='?', default=".users")
+parser.add_argument("-q", "--quotefile", nargs='?', default=".quotes")
+parser.add_argument("-u", "--userfile", nargs='?', default=".users")
 parser.add_argument("-m", "--modfile", nargs='?', default=".mods")
 parser.add_argument("-t", "--tls", action="store_true", default=False)
 parser.add_argument("--password", nargs='?')
@@ -55,6 +56,7 @@ args = parser.parse_args(sys.argv[1:])
 readbuffer = ""
 currentusers = []
 mods = []
+quotes = []
 shared_source = False
 
 def loadData(object):
@@ -70,9 +72,21 @@ stats = loadData(args.statsfile)
 generous = loadData(args.generousfile)
 scrambleTracker = loadData(args.scramblefile)
 
+with open(args.quotefile) as f:
+    appendFlag = True
+    for line in f:
+        if appendFlag:
+            quotes.append(line)
+            appendFlag = False
+        if line == ";;;\n":
+            appendFlag = True
+            continue
+        else:
+            quotes[len(quotes)-1] += line
+
 with open(args.userfile) as f:
     for line in f:
-    currentusers.append(line[:-1])
+        currentusers.append(line[:-1])
 
 with open(args.modfile) as f:
     for line in f:
@@ -226,6 +240,12 @@ def helpMessage(sender):
     response = "README can be found here: https://github.com/Breilly38/chipbot"
     sendTo(sender, response)
 
+def quoteMessage(sender, message):
+    quotes.append(message + '\n;;;\n')
+
+    reponse = "Quote #" + (len(quotes - 1)) + " added by " + sender
+    sendTo(args.channel, response) 
+
 def anonSay(message):
     sendTo(args.channel, message)
 
@@ -239,28 +259,28 @@ def updateBamboo():
 def xkcd(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("xkcd "+searchTerm):
+        for result in g.search("xkcd"+searchTerm):
             if "http://xkcd.com/" in result.url:
                 return result.url
 
 def youtube(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("youtube "+searchTerm):
+        for result in g.search("youtube"+searchTerm):
             if "http://www.youtube.com/watch" in result.url:
                 return result.title + " " + result.url
 
 def bandcamp(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("bandcamp "+searchTerm):
+        for result in g.search("bandcamp"+searchTerm):
             if "bandcamp.com" in result.url:
                 return result.title + " " + result.url
 
 def soundcloud(searchTerm):
     if searchTerm != "":
         g = Google()
-        for result in g.search("soundcloud "+searchTerm):
+        for result in g.search("soundcloud"+searchTerm):
             if "soundcloud.com" in result.url:
                 return result.title + " " + result.url
 
@@ -556,6 +576,9 @@ while 1:
             
                 elif func == "help":
                     helpMessage(sender)
+                    
+                elif func == "quote":
+                    quoteMessage(sender, ' '.join(arglist))
                     
                 else:
                     politelyDoNotEngage(sender)
