@@ -11,7 +11,7 @@ To run Chipbot in debug mode, the following syntax is recommended:
 python bot.py -n "uniqueusername" -c "#uniquechannel" -d
 ```
 
-And the bot will join #uniquechannel as uniqueusername on freenode. All messages received will be printed to the terminal.
+And the bot will join #uniquechannel as uniqueusername on esper.net. All messages received will be printed to the terminal.
 
 The ```argparse``` and ```pattern``` modules will also be required, which can be installed via pip:
 ```
