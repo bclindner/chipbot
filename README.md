@@ -65,7 +65,7 @@ Checking stats
 
 #### Quality
 
-Quality is calculated by dividing the number of times a user speaks by their rank. This gives a metric for the "quality" of a user's posts (i.e. what percent of them are "good")
+Quality is calculated by dividing a user's karma by the number of times they've spoken, and multiplying that by 100. This gives a metric for the "quality" of a user's posts (i.e. what percent of them are "good")
 
 Checking quality
 - quality
@@ -73,7 +73,7 @@ Checking quality
 
 #### Generosity
 
-Generosity tracks which users are giving the most karma using the ++ commands. Every time a user issues such a command, their generosity value increases. This information will give a metric of who is using the system the most to increase other user's karma.
+Generosity tracks which users are giving the most karma using the ++ commands. Every time a user issues such a command, their generosity value increases. If a user issues the -- command, their generosity will decrease. This information will give a metric of who is using the system the most to increase other user's karma. 
 
 Checking generosity
 - generosity
