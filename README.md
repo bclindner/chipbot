@@ -44,9 +44,7 @@ Incrementing Points (Phrase)
 Incrementing Karma/Points (Inline)
 - any++ arbitrary++ [user]++
 
-*result: "any" will get +1 point*
-*result: "arbitrary" will get +1 point*
-*result: [user] will get +1 karma*
+*result: "any" will get +1 point, "arbitrary" will get +1 point, and [user] will get +1 karma*
 
 Checking karma/points rank
 - rank [user]
