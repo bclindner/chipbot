@@ -59,7 +59,7 @@ currentusers = []
 mods = []
 quotes = []
 shared_source = False
-removeDash = True
+alias = True
 
 def loadData(object):
     try:
@@ -129,10 +129,11 @@ s.send(bytes("JOIN %s\r\n" % args.channel))
 
 # returns the sender
 def parseSender(line):
-    global removeDash
+    global alias
     sender = line[0][1:line[0].find("!")]
-    if removeDash:
+    if alias:
         sender = sender.split('-')[0]
+        sender = sender.split('|')[0]
     return sender
 
 # returns the channel
@@ -348,9 +349,10 @@ def computeResponse(sender, message, channel):
         else:
             subject = "" 
 
-        global removeDash
-        if removeDash:
+        global alias
+        if alias:
             subject = subject.split('-')[0]
+            subject = subject.split('|')[0] 
 
         if symbol == "``":
             usrstats = getStats(subject)
@@ -397,8 +399,9 @@ def computeResponse(sender, message, channel):
     elif func == "rank":
         if len(splitmsg) == 2:
             subject = splitmsg[1].lstrip()
-            if removeDash:
-                subject = subject.split('-')[0] 
+            if alias:
+                subject = subject.split('-')[0]
+                subject = subject.split('|')[0]
             return computeResponse(sender, subject+"~~", channel)
 
     # report the top 5 users and phrases
@@ -423,8 +426,9 @@ def computeResponse(sender, message, channel):
     elif func == "stats":
         if len(splitmsg) == 2:
             subject = splitmsg[1].lstrip()
-            if removeDash:
+            if alias:
                 subject = subject.split('-')[0]
+                subject = subject.split('|')[0]
             return computeResponse(sender, subject+"``", channel)
         elif len(splitmsg) == 1:
             top_users = "Top 5 Users by Volume:"
@@ -440,8 +444,9 @@ def computeResponse(sender, message, channel):
     elif func == "generosity":
         if len(splitmsg) == 2:
             subject = splitmsg[1].lstrip()
-            if removeDash:
+            if alias:
                 subject = subject.split('-')[0]
+                subject = subject.split('|')[0]
             return computeResponse(sender, subject+"$$", channel)
         elif len(splitmsg) == 1:
             most_generous = "Top 5 Most Generous Users:"
@@ -464,8 +469,9 @@ def computeResponse(sender, message, channel):
     elif func == "quality":
         if len(splitmsg) == 2:
             subject = splitmsg[1].lstrip()
-            if removeDash:
+            if alias:
                 subject = subject.split('-')[0]
+                subject = subject.split('|')[0]
             return computeResponse(sender, subject+"**", channel)
         if len(splitmsg) == 1:
             top_users = "Top 5 Users by Quality:"
@@ -549,8 +555,9 @@ while 1:
                 u = u.lstrip("@").lstrip(":").lower()
                 if u[0] == "+":
                     u = u[1:]
-                if removeDash:
-                    u.split('-')[0]
+                if alias:
+                    u = u.split('-')[0]
+                    u = u.split('|')[0]
                 if not u in currentusers:
                     currentusers.append(u)
                     with open(args.userfile, 'a') as f:
@@ -562,8 +569,9 @@ while 1:
                 u = line[2].lstrip("@").lstrip(":").lower()
                 if u[0] == "+":
                     u = u[1:] 
-                if removeDash:
+                if alias:
                     u = u.split('-')[0]
+                    u = u.split('|')[0]
                 if not u in currentusers:
                     currentusers.append(u)
                     with open(args.userfile, 'a') as f:
