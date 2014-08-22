@@ -515,6 +515,9 @@ def computeResponse(sender, message, channel):
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
 
+    elif func == ".rimshot":
+        return "www.instantrimshot.com"
+
     elif func == ".quote":
         return quoteMessage(sender, message[6:])
 
