@@ -34,6 +34,8 @@ from pattern.web import *
 import re
 import time
 import random
+from mechanize import Browser
+from BeautifulSoup import BeautifulSoup
 
 parser = argparse.ArgumentParser(description="Bamboo argument parsing")
 parser.add_argument("-s", "--server", nargs='?', default="warden.esper.net")
@@ -50,6 +52,7 @@ parser.add_argument("-g", "--generousfile", nargs='?', default=".generous")
 parser.add_argument("-q", "--quotefile", nargs='?', default=".quotes")
 parser.add_argument("-u", "--userfile", nargs='?', default=".users")
 parser.add_argument("-m", "--modfile", nargs='?', default=".mods")
+parser.add_argument("-keyfile", nargs='?', default=".key")
 parser.add_argument("-t", "--tls", action="store_true", default=False)
 parser.add_argument("--password", nargs='?')
 args = parser.parse_args(sys.argv[1:])
@@ -60,6 +63,7 @@ mods = []
 quotes = []
 shared_source = False
 alias = True
+googlekey = ''
 
 def loadData(object):
     try:
@@ -85,6 +89,12 @@ with open(args.userfile) as f:
 with open(args.modfile) as f:
     for line in f:
         mods.append(line[:-1]) 
+
+with open(args.keyfile) as f:
+    for line in f:
+        googlekey = line
+
+print googlekey
 
 # connect to the server
 s = socket.socket()
@@ -264,33 +274,28 @@ def anonDo(message):
 def updateBamboo():
     exit(0)
 
+def searchGoogle(searchTerm, searchUrl):
+    global googlekey
+    g = Google(license=googlekey)
+    try: 
+        results = g.search(searchTerm, cached=False)
+    except pattern.web.HTTP403Forbidden:
+        return "Quota of searches exceeded for the day!"
+    for result in results:
+        if searchUrl in result.url:
+            return result.title + ' ' + result.url
+        
 def xkcd(searchTerm):
-    if searchTerm != "":
-        g = Google()
-        for result in g.search("xkcd"+searchTerm):
-            if "http://xkcd.com/" in result.url:
-                return result.url
+    return searchGoogle("xkcd"+searchTerm, "http://xkcd.com/")
 
 def youtube(searchTerm):
-    if searchTerm != "":
-        g = Google()
-        for result in g.search("youtube"+searchTerm):
-            if "http://www.youtube.com/watch" in result.url:
-                return result.title + " " + result.url
+    return searchGoogle("youtube"+searchTerm, "http://www.youtube.com/watch")
 
 def bandcamp(searchTerm):
-    if searchTerm != "":
-        g = Google()
-        for result in g.search("bandcamp"+searchTerm):
-            if "bandcamp.com" in result.url:
-                return result.title + " " + result.url
+    return searchGoogle("bandcamp"+searchTerm, "bandcamp.com")
 
 def soundcloud(searchTerm):
-    if searchTerm != "":
-        g = Google()
-        for result in g.search("soundcloud"+searchTerm):
-            if "soundcloud.com" in result.url:
-                return result.title + " " + result.url
+    return searchGoogle("soundcloud"+searchTerm,"soundcloud.com")
 
 def specificQuote(num):
     n = int(num) - 1
@@ -299,6 +304,18 @@ def specificQuote(num):
 
 def randomQuote():
     return quotes[random.randint(0, len(quotes)-1)]
+
+"""
+def parseURL(url):
+    br = Browser()
+    res = br.open(url)
+    data = res.get_data()
+    
+    soup = BeautifulSoup(data)
+    title = soup.find('title')
+
+    return title.renderContents()
+"""
 
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel):
@@ -530,6 +547,13 @@ def computeResponse(sender, message, channel):
     elif message[:len(args.nick)+10] == args.nick+": scramble":
         toggleScrambles(sender.lower())
         return sender.lower() + " is now known as %s%s" % scramble((sender.lower(),""))
+
+"""
+    elif re.findall('.*\.com', message)!= []:
+        url = "http://www." + re.findall('.*\.com[^ ]*', message)[0]
+        url.decode('utf-8')
+        return parseURL(url)
+"""        
 
 while 1:
     # read in lines from the socket
