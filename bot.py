@@ -535,6 +535,9 @@ def computeResponse(sender, message, channel):
     elif func == ".rimshot":
         return "www.instantrimshot.com"
 
+    elif func == ".sandstorm":
+        return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
+
     elif func == ".quote":
         return quoteMessage(sender, message[6:])
 
