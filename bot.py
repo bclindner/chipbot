@@ -538,8 +538,11 @@ def computeResponse(sender, message, channel):
     elif func == ".sandstorm":
         return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
 
-    elif func == ".quote" or func == ".addquote":
+    elif func == ".quote":
         return quoteMessage(sender, message[6:])
+
+    elif func == ".addquote":
+        return quoteMessage(sender, message[9:])
 
     elif func == ".getquote":
         spltmsg = message.split(' ')
