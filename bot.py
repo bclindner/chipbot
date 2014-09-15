@@ -538,7 +538,7 @@ def computeResponse(sender, message, channel):
     elif func == ".sandstorm":
         return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
 
-    elif func == ".quote":
+    elif func == ".quote" or func == ".addquote":
         return quoteMessage(sender, message[6:])
 
     elif func == ".getquote":
@@ -546,6 +546,9 @@ def computeResponse(sender, message, channel):
         if len(spltmsg) > 1:
             return specificQuote(spltmsg[1])
         return randomQuote()
+
+    elif func == ".getquotes":
+        return "http://162.243.15.186/quotes.txt"
 
     elif message[:len(args.nick)+10] == args.nick+": scramble":
         toggleScrambles(sender.lower())
