@@ -134,6 +134,8 @@ while time.time() < timeout_start + timeout:
     if brkflg == 1:
         break
 
+if brkflg == 0: #timedout
+    exit(0)
 if args.password:
     time.sleep(5)
     s.send(bytes("PRIVMSG NickServ : identify %s\r\n" % args.password))
