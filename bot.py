@@ -108,7 +108,10 @@ s.send(bytes("NICK %s\r\n" % args.nick))
 s.send(bytes("USER %s %s bla :%s\r\n" % (args.ident, args.server, args.realname)))
 
 brkflg = 0
-while True:
+timeout_start = time.time()
+timeout = 300 # [seconds]
+
+while time.time() < timeout_start + timeout:
     # join the channel and set nick
     readbuffer = readbuffer+s.recv(1024).decode("UTF-8")
     temp = readbuffer.split("\n")
