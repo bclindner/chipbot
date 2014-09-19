@@ -572,6 +572,15 @@ def computeResponse(sender, message, channel):
     elif func == ".flip":
         return unicode("(╯°□°）╯︵ ┻━┻", 'utf-8')
 
+    elif func == ".unflip":
+        return unicode("┬──┬ ノ( ゜-゜ノ)", 'utf-8')
+
+    elif func == ".flipharder":
+        return unicode("(ノಠ益ಠ)ノ彡┻━┻", 'utf-8')
+    
+    elif func == ".doubleflip":
+        return unicode("┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻", 'utf-8')
+
     elif func == ".roll":
         spltmsg = message.split(' ')
         if len(spltmsg) > 1:
