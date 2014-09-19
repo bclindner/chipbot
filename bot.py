@@ -310,14 +310,13 @@ def roll(num):
     except ValueError:
         return num + "is not a number"
 
-    randnum = random.randint(0, num)
+    randnum = random.randint(1, num)
     if num == 20 and randnum == 20:
         return "You rolled a natural 20! Critical Threat!"
-    elif:
-        num == 20 and randnum == 1:
+    elif num == 20 and randnum == 1:
         return "You rolled a natural 1 :("
     else:
-        return "You rolled a " + num
+        return "You rolled a " + str(randnum)
 
 def specificQuote(num):
     n = int(num) - 1
