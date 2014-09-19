@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 
     Bamboo is an IRC karma-tracking bot
@@ -18,9 +21,6 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """
-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import argparse
 import operator
@@ -558,6 +558,9 @@ def computeResponse(sender, message, channel):
 
     elif func == ".sandstorm":
         return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
+
+    elif func == ".flip":
+        return unicode("(╯°□°）╯︵ ┻━┻", 'utf-8')
 
     elif func == ".roll":
         spltmsg = message.split(' ')
