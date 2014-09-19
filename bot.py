@@ -310,6 +310,9 @@ def roll(num):
     except ValueError:
         return num + " is not a number"
 
+    if num <= 0:
+        return "You roll an imaginary die, which lands on an imaginary number"
+
     randnum = random.randint(1, num)
     if num == 20 and randnum == 20:
         return "You rolled a natural 20! Critical Threat!"
