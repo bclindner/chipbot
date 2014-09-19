@@ -308,7 +308,7 @@ def roll(num):
     try:
         num = int(num)
     except ValueError:
-        return num + "is not a number"
+        return num + " is not a number"
 
     randnum = random.randint(1, num)
     if num == 20 and randnum == 20:
