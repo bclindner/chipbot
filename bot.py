@@ -302,6 +302,23 @@ def bandcamp(searchTerm):
 def soundcloud(searchTerm):
     return searchGoogle("soundcloud"+searchTerm,"soundcloud.com")
 
+def roll(num):
+    if num[0].lower() == 'd':
+        num = num[1:]
+    try:
+        num = int(num)
+    except ValueError:
+        return num + "is not a number"
+
+    randnum = random.randint(0, num)
+    if num == 20 and randnum == 20:
+        return "You rolled a natural 20! Critical Threat!"
+    elif:
+        num == 20 and randnum == 1:
+        return "You rolled a natural 1 :("
+    else:
+        return "You rolled a " + num
+
 def specificQuote(num):
     n = int(num) - 1
     if len(quotes) > n:
@@ -542,6 +559,13 @@ def computeResponse(sender, message, channel):
 
     elif func == ".sandstorm":
         return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
+
+    elif func == ".roll":
+        spltmsg = message.split(' ')
+        if len(spltmsg) > 1:
+            return roll(spltmsg[1])
+        else:
+            return roll("20")
 
     elif func == ".quote":
         return quoteMessage(sender, message[6:])
