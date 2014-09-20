@@ -67,6 +67,17 @@ shared_source = False
 alias = True
 googlekey = ''
 
+# Utter Stupidity
+otherm = [
+"No.",
+"You are not authorized to upvote Other M.",
+"Why would I do that?",
+"What's wrong with you?",
+"Did you say something?",
+"Oh yeah, you think you're REALLY clever, don't you?",
+"You're the reason why we can't have nice things."
+]
+
 def loadData(object):
     try:
         with open(object, 'rb') as file:
@@ -435,8 +446,10 @@ def computeResponse(sender, message, channel):
             setGenerosity(sender, netgain)
             return "%s has %i karma" % (subject, getPoints(subject))
         else:
+            # Utter stupidity here (other m sucks)
             if message.lstrip().lower() == 'other m' and netgain == 1:
-                return "No."
+                global otherm
+                return random.choice(otherm)
             setPoints(message.lstrip(), netgain)
             return "\"%s\" has %i point%s" % (message, getPoints(message), ["s", ""][getPoints(message)==1])
 
