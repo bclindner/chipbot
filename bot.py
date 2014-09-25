@@ -186,8 +186,8 @@ def alias(subject):
         subject = subject.split('-')[0]
         subject = subject.split('|')[0]
         try:
-            if aliases[subject] != None:
-                subject = aliases[subject]
+            if aliases[subject.lower()] != None:
+                subject = aliases[subject.lower()]
         except KeyError:
             pass 
     return subject
@@ -367,11 +367,12 @@ def addalias(sender, realalias):
     global aliasconfirm
 
     subject = alias(sender)
+    realalias = alias(realalias)
 
     if subject == realalias:
         return "Tryin' to pull a fast one on me, eh? Use .resetalias on your alias if you messed up"
 
-    aliasconfirm[realalias] = subject
+    aliasconfirm[realalias.lower()] = subject.lower()
     confirmstr = realalias + " will resolve to " + subject + ". Confirm by logging into alias and "
     confirmstr += "using '.confirmalias " + subject + "'"
     return confirmstr
@@ -382,12 +383,12 @@ def confirmalias(sender, realalias):
     global aliasconfirm
     global aliases
 
-    if sender == realalias:
+    if sender.lower() == realalias.lower():
         return "This alias already resolves to " + realalias + "."
 
     try:
-        if aliasconfirm[sender] == realalias:
-            aliases[sender] = realalias
+        if aliasconfirm[sender.lower()] == realalias.lower():
+            aliases[sender.lower()] = realalias.lower()
             with open(args.aliasfile, 'wb') as file:
                 pickle.dump(aliases, file)
             return sender + " now resolves to " + realalias
@@ -397,7 +398,7 @@ def confirmalias(sender, realalias):
 def resetalias(sender):
     global aliases
     
-    aliases[sender] = None
+    aliases[sender.lower()] = None
     with open(args.aliasfile, 'wb') as file:
             pickle.dump(aliases, file)
     return sender + " now resolves to " + sender 
