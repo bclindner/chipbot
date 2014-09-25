@@ -131,7 +131,7 @@ Reset an alias:
 
 #### Emotes
 
-Chipbot can now use EMOTIONS. To make chipbot display some EMOTIONS like Ellen Paige, use .emote
+Chipbot can now use EMOTIONS. To make chipbot display some EMOTIONS use .emote
 
 If you see weird characters instead of EMOTIONS, you'll need to change your font. Monospace and Sans are guaranteed to work, though results may vary.
 
