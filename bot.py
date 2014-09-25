@@ -75,7 +75,9 @@ otherm = [
 "What's wrong with you?",
 "Did you say something?",
 "Oh yeah, you think you're REALLY clever, don't you?",
-"You're the reason why we can't have nice things."
+"You're the reason why we can't have nice things.",
+"Does not compute.",
+"THEM'S FIGHTIN' WORDS."
 ]
 
 def loadData(object):
