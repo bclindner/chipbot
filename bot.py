@@ -34,7 +34,7 @@ from pattern.web import *
 import re
 import time
 import random
-from mechanize import Browser
+import mechanize 
 from BeautifulSoup import BeautifulSoup
 
 parser = argparse.ArgumentParser(description="Bamboo argument parsing")
@@ -403,17 +403,18 @@ def resetalias(sender):
             pickle.dump(aliases, file)
     return sender + " now resolves to " + sender 
     
-"""
+
 def parseURL(url):
-    br = Browser()
-    res = br.open(url)
-    data = res.get_data()
-    
+    br = mechanize.Browser()
+    try:
+        res = br.open(url)
+        data = res.get_data()
+    except mechanize._mechanize.BrowserStateError:
+        return
     soup = BeautifulSoup(data)
     title = soup.find('title')
 
-    return title.renderContents()
-"""
+    return title.renderContents().decode('utf-8')
 
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel, ogsender=None):
@@ -680,12 +681,10 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".resetalias":
         return resetalias(ogsender)
 
-"""
-    elif re.findall('.*\.com', message)!= []:
-        url = "http://www." + re.findall('.*\.com[^ ]*', message)[0]
+    elif re.findall('htt.*\.com', message)!= []:
+        url = re.findall('htt.*\.com[^ ]*', message)[0]
         url.decode('utf-8')
         return parseURL(url)
-"""        
 
 while 1:
     # read in lines from the socket
