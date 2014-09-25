@@ -409,7 +409,7 @@ def parseURL(url):
     try:
         res = br.open(url)
         data = res.get_data()
-    except mechanize._mechanize.BrowserStateError:
+    except (mechanize._mechanize.BrowserStateError, urllib2.URLError) as e:
         return
     soup = BeautifulSoup(data)
     title = soup.find('title')
