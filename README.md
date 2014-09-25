@@ -118,11 +118,11 @@ Chipbot can now keep track of different user nicks. Registering an alias takes t
 
 Declaring an alias:
 - .addalias <alias>
-Example: (Nick is Hoodie) .addalias PresidentHoodie
+- Example: (Nick is Hoodie) .addalias PresidentHoodie
 
 Confirming an alias:
 - .confirmalias <main nick>
-Example: (Nick is PresidentHoodie) .confirmalias Hoodie
+- Example: (Nick is PresidentHoodie) .confirmalias Hoodie
 
 If you want to stop associating an alias with your nick, log into the alias and use .resetalias
 
