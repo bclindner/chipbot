@@ -387,17 +387,28 @@ def confirmalias(sender, realalias):
         return "This alias already resolves to " + realalias + "."
 
     try:
-        if aliasconfirm[sender.lower()] == realalias.lower():
-            aliases[sender.lower()] = realalias.lower()
-            with open(args.aliasfile, 'wb') as file:
-                pickle.dump(aliases, file)
-            return sender + " now resolves to " + realalias
+        aliasconfirm[sender.lower()]
     except KeyError:
         return "Alias is not ready to confirm. Use .addalias when logged into your main nick"
+    if aliasconfirm[sender.lower()] == realalias.lower():
+        aliases[sender.lower()] = realalias.lower()
+        with open(args.aliasfile, 'wb') as file:
+            pickle.dump(aliases, file)
+        return sender + " now resolves to " + realalias
 
-def resetalias(sender):
+
+def resetalias(sender, realalias=None):
     global aliases
     
+    if realalias and realalias != '':
+        try: 
+            aliases[realalias.lower()]
+        except KeyError:
+            return "Alias not currently in use"
+        if aliases[realalias.lower()] == sender.lower():
+            aliases[realalias.lower()] = None
+            return realalias + " now resolves to " + realalias
+
     aliases[sender.lower()] = None
     with open(args.aliasfile, 'wb') as file:
             pickle.dump(aliases, file)
