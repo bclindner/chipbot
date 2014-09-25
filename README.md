@@ -111,3 +111,29 @@ Add a quote:
 Post a quote:
 - .getquote (random)
 - .getquote [# of quote]
+
+#### Alias
+
+Chipbot can now keep track of different user nicks. Registering an alias takes two separate commands: .addalias and .confirmalias. .addalias is used on your main nick to declare that you want to register a new alias. .confirmalias is used on your newly declared alias to confirm it as an official alias of your main nick.
+
+Declaring an alias:
+- .addalias <alias>
+Example: (Nick is Hoodie) .addalias PresidentHoodie
+
+Confirming an alias:
+- .confirmalias <main nick>
+Example: (Nick is PresidentHoodie) .confirmalias Hoodie
+
+If you want to stop associating an alias with your nick, log into the alias and use .resetalias
+
+Reset an alias:
+- .resetalias
+
+#### Emotes
+
+Chipbot can now use EMOTIONS. To make chipbot display some EMOTIONS like Ellen Paige, use .emote
+
+If you see weird characters instead of EMOTIONS, you'll need to change your font. Monospace and Sans are guaranteed to work, though results may vary.
+
+EMOTIONS:
+- .emote
