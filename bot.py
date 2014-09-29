@@ -748,7 +748,9 @@ while 1:
         elif line[1] == "JOIN":
             sender, ogsender = parseSender(line)
             if not sender in currentusers:
-                u, ogsender = parseSender(line).lstrip("@").lstrip(":").lower()
+                u, ogsender = parseSender(line)
+                u = u.lstrip("@").lstrip(":").lower()
+                ogsender = ogsender.lstrip("@").lstrip(":").lower()
                 if not u in currentusers:
                     currentusers.append(u)
                     with open(args.userfile, 'a') as f:
