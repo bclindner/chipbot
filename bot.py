@@ -642,6 +642,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".sandstorm":
         return "https://soundcloud.com/majorleaguewobs/darude-sandstorm-mlg-trap-remix"
 
+    elif func == ".slam":
+        return "comeonandsl.am"
+
     elif func == ".flip":
         return unicode("(╯°□°）╯︵ ┻━┻", 'utf-8')
 
