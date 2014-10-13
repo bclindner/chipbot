@@ -420,9 +420,12 @@ def parseURL(url):
     try:
         res = br.open(url)
         data = res.get_data()
-    except (mechanize._mechanize.BrowserStateError, urllib2.URLError) as e:
+    except (UnicodeEncodeError, mechanize._mechanize.BrowserStateError, urllib2.URLError) as e:
         return
-    soup = BeautifulSoup(data)
+    try:
+        soup = BeautifulSoup(data)
+    except UnicodeEncodeError:
+        return
     title = soup.find('title')
 
     return title.renderContents().decode('utf-8')
