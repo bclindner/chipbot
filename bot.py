@@ -657,6 +657,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".flipharder":
         return unicode("(ノಠ益ಠ)ノ彡┻━┻", 'utf-8')
     
+    elif func == ".fliphardest":
+        return unicode("(ノϬДϬ)ノ彡┴─ ҉ ─┬", 'utf-8')
+
     elif func == ".doubleflip":
         return unicode("┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻", 'utf-8')
 
