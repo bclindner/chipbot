@@ -47,9 +47,9 @@ Incrementing Karma/Points (Inline)
 *result: "any" will get +1 point, "arbitrary" will get +1 point, and [user] will get +1 karma*
 
 Checking karma/points rank
-- rank [user]
+- .ranks [user]
 - [user]~~
-- ranks
+- .ranks
 
 *result: information on the top 5 users and phrases*
 
@@ -58,8 +58,8 @@ Checking karma/points rank
 Stats are kept track of for each user that sends messages to the channel. That is, every time a user speaks a counter specifically for them is incremented. This keeps track of who is speaking the most in the channel. 
 
 Checking stats
-- stats
-- stats [user]
+- .stats
+- .stats [user]
 
 *result: information about the top 5 speakers in the channel, or information on specific user*
 
@@ -68,16 +68,16 @@ Checking stats
 Quality is calculated by dividing a user's karma by the number of times they've spoken, and multiplying that by 100. This gives a metric for the "quality" of a user's posts (i.e. what percent of them are "good")
 
 Checking quality
-- quality
-- quality [user]
+- .quality
+- .quality [user]
 
 #### Generosity
 
 Generosity tracks which users are giving the most karma using the ++ commands. Every time a user issues such a command, their generosity value increases. If a user issues the -- command, their generosity will decrease. This information will give a metric of who is using the system the most to increase other user's karma. 
 
 Checking generosity
-- generosity
-- generosity [user]
+- .generosity
+- .generosity [user]
 
 #### Scrambling username
 
