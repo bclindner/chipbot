@@ -347,7 +347,7 @@ def soundcloud(searchTerm):
     return searchGoogle("soundcloud"+searchTerm,"soundcloud.com")
 
 def wikipedia(searchTerm):
-    return searchGoogle("wikipedia"+searchTerm,"wikipedia.com")
+    return searchGoogle("wikipedia"+searchTerm,"wikipedia.org")
 
 def roll(num):
     if num[0].lower() == 'd':
@@ -658,7 +658,7 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".sc":
         return soundcloud(message[3:]) 
     
-    elif func == ".wi":
+    elif func == ".wp":
         return wikipedia(message[3:])
 
     elif func == ".meow":
