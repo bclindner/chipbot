@@ -661,6 +661,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".wp":
         return wikipedia(message[3:])
 
+    elif func == ".map":
+        return "http://tinyurl.com/chipwinmap"
+
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
 
