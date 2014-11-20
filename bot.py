@@ -353,17 +353,21 @@ def roll(num):
 
     mult = None
 
-    index = num.find('d', end=len(num)-1)
+    index = num.find('d', 0, len(num)-1)
 
     if index != -1:
         if index > 0:
             mult = num[0:index]
-        num = num[index:]
+        num = num[index+1:]
 
     try:
         num = int(num)
+        mult = int(mult)
     except ValueError:
         return num + " is not an integer"
+
+    if mult > 1000:
+        return "Too many dice!!!"
 
     if num <= 0:
         return "You roll an imaginary die, which lands on an imaginary number"
