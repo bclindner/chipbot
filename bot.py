@@ -350,8 +350,16 @@ def wikipedia(searchTerm):
     return searchGoogle("wikipedia"+searchTerm,"wikipedia.org")
 
 def roll(num):
-    if num[0].lower() == 'd':
-        num = num[1:]
+
+    mult = None
+
+    index = num.find('d', end=len(num)-1)
+
+    if index != -1:
+        if index > 0:
+            mult = num[0:index]
+        num = num[index:]
+
     try:
         num = int(num)
     except ValueError:
@@ -360,7 +368,15 @@ def roll(num):
     if num <= 0:
         return "You roll an imaginary die, which lands on an imaginary number"
 
+    if mult:
+        randnum = 0
+        for i in range(mult):
+            randnum += random.randint(1, num)
+        
+        return "You rolled " + str(randnum)
+
     randnum = random.randint(1, num)
+        
     if num == 20 and randnum == 20:
         return "You rolled a natural 20! Critical Threat!"
     elif num == 20 and randnum == 1:
