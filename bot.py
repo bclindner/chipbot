@@ -351,7 +351,7 @@ def wikipedia(searchTerm):
 
 def roll(num):
 
-    mult = None
+    mult = '1'
 
     index = num.find('d', 0, len(num)-1)
 
@@ -372,7 +372,7 @@ def roll(num):
     if num <= 0:
         return "You roll an imaginary die, which lands on an imaginary number"
 
-    if mult:
+    if mult > 1:
         randnum = 0
         for i in range(mult):
             randnum += random.randint(1, num)
