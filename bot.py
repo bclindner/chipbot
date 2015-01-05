@@ -97,7 +97,7 @@ scrambleTracker = loadData(args.scramblefile)
 aliases = loadData(args.aliasfile)
 
 def loadStrings(filename):
-    slist = ""
+    slist = []
     try:
         with open(filename) as f:
             for line in f:
@@ -110,8 +110,13 @@ def loadStrings(filename):
 quotes = loadStrings(args.quotefile)
 currentusers = loadStrings(args.userfile)
 mods = loadStrings(args.modfile)
-googlekey = loadStrings(args.keyfile)[0]
+googlekey = loadStrings(args.keyfile)
 emotes = loadStrings(args.emotefile)
+
+if googlekey == []:
+    googlekey = ""
+else:
+    googlekey = [0]
 
 #with open(args.quotefile) as f:
 #    for line in f:
