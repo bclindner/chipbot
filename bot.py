@@ -96,25 +96,42 @@ generous = loadData(args.generousfile)
 scrambleTracker = loadData(args.scramblefile)
 aliases = loadData(args.aliasfile)
 
-with open(args.quotefile) as f:
-    for line in f:
-        quotes.append(line)
+def loadStrings(filename):
+    slist = ""
+    try:
+        with open(filename) as f:
+            for line in f:
+                slist.append(line)
+    except IOError:
+        open(filename, "w+")
+
+    return slist
+
+quotes = loadStrings(args.quotefile)
+currentusers = loadStrings(args.userfile)
+mods = loadStrings(args.modfile)
+googlekey = loadStrings(args.keyfile)[0]
+emotes = loadStrings(args.emotefile)
+
+#with open(args.quotefile) as f:
+#    for line in f:
+#        quotes.append(line)
  
-with open(args.userfile) as f:
-    for line in f:
-        currentusers.append(line[:-1])
+#with open(args.userfile) as f:
+#    for line in f:
+#        currentusers.append(line[:-1])
 
-with open(args.modfile) as f:
-    for line in f:
-        mods.append(line[:-1]) 
+#with open(args.modfile) as f:
+#    for line in f:
+#        mods.append(line[:-1]) 
 
-with open(args.keyfile) as f:
-    for line in f:
-        googlekey = line
+#with open(args.keyfile) as f:
+#    for line in f:
+#        googlekey = line
 
-with open(args.emotefile) as f:
-    for line in f:
-        emotes.append(line[:-1])
+#with open(args.emotefile) as f:
+#    for line in f:
+#        emotes.append(line[:-1])
 
 # connect to the server
 s = socket.socket()
