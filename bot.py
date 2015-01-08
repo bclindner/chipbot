@@ -111,15 +111,8 @@ def loadStrings(filename):
 quotes = loadStrings(args.quotefile)
 currentusers = loadStrings(args.userfile)
 mods = loadStrings(args.modfile)
-googlekey = loadStrings(args.keyfile)
 emotes = loadStrings(args.emotefile)
 
-print mods
-
-if googlekey == []:
-    googlekey = ""
-else:
-    googlekey = [0]
 
 #with open(args.quotefile) as f:
 #    for line in f:
@@ -133,9 +126,13 @@ else:
 #    for line in f:
 #        mods.append(line[:-1]) 
 
-#with open(args.keyfile) as f:
-#    for line in f:
-#        googlekey = line
+try:
+    with open(args.keyfile) as f:
+        for line in f:
+            googlekey = line
+except IOError:
+    open(filename, "w+")
+    googlekey = ""
 
 #with open(args.emotefile) as f:
 #    for line in f:
