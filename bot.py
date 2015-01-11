@@ -706,6 +706,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".map":
         return "http://chiptuneswin.com/map"
 
+    elif func == ".chart":
+        return "http://chiptuneswin.com/chipchart"
+
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
 
