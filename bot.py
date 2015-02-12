@@ -82,7 +82,7 @@ otherm = [
 "THEM'S FIGHTIN' WORDS."
 ]
 
-alias = True
+#alias = True
 napping = False
 
 def loadData(object):
