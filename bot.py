@@ -66,7 +66,6 @@ mods = []
 quotes = []
 emotes = []
 shared_source = False
-<<<<<<< HEAD
 aliasconfirm = {}
 googlekey = ''
 
