@@ -877,8 +877,8 @@ while 1:
                 if func == "update" and modflag:
                     updateBamboo()        
 					
-				if func == "sleep" and modflag:
-					sleepBamboo()
+                if func == "sleep" and modflag:
+                    sleepBamboo()
            
                 elif func == "say" and modflag and arglist != []:
                     anonSay(' '.join(arglist))
