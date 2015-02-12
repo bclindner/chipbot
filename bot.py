@@ -66,6 +66,7 @@ mods = []
 quotes = []
 emotes = []
 shared_source = False
+<<<<<<< HEAD
 aliasconfirm = {}
 googlekey = ''
 
@@ -81,6 +82,9 @@ otherm = [
 "Does not compute.",
 "THEM'S FIGHTIN' WORDS."
 ]
+
+alias = True
+napping = False
 
 def loadData(object):
     try:
@@ -334,6 +338,10 @@ def anonDo(message):
 # depends on git pull in shell while loop
 def updateBamboo():
     exit(0)
+	
+def sleepBamboo():
+	#Do something here so Chipbot chills out for some time
+	napping = True
 
 def searchGoogle(searchTerm, searchUrl):
     global googlekey
@@ -868,6 +876,9 @@ while 1:
                     
                 if func == "update" and modflag:
                     updateBamboo()        
+					
+				if func == "sleep" and modflag:
+					sleepBamboo()
            
                 elif func == "say" and modflag and arglist != []:
                     anonSay(' '.join(arglist))
