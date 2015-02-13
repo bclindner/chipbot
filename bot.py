@@ -341,9 +341,9 @@ def updateBamboo():
 def silenceBamboo():
     silentMode = not silentMode
     if silentMode:
-        anonSay("Running in silent mode!")
+        return "Running in silent mode!"
     else:
-        anonSay("Silent mode deactivated")
+        return "Silent mode deactivated"
 
 def searchGoogle(searchTerm, searchUrl):
     global googlekey
@@ -883,8 +883,9 @@ while 1:
                     updateBamboo()        
 					
                 if func == "silent" and modflag:
-                    silenceBamboo()
-           
+                    msg = silenceBamboo()
+                    anonSay(msg)
+
                 elif func == "say" and modflag and arglist != []:
                     anonSay(' '.join(arglist))
 
