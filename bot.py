@@ -83,7 +83,7 @@ otherm = [
 ]
 
 #alias = True
-napping = False
+silentMode = False
 
 def loadData(object):
     try:
@@ -338,9 +338,8 @@ def anonDo(message):
 def updateBamboo():
     exit(0)
 	
-def sleepBamboo():
-	#Do something here so Chipbot chills out for some time
-	napping = True
+def silenceBamboo():
+    silentMode = True
 
 def searchGoogle(searchTerm, searchUrl):
     global googlekey
@@ -505,6 +504,9 @@ def computeResponse(sender, message, channel, ogsender=None):
 
     if sender:
         setStats(sender)
+
+    if silentMode and sender not in mods:
+        return
 
     output = []
     messages = []
@@ -713,8 +715,8 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".map":
         return "http://chiptuneswin.com/map"
 
-    elif func == ".chipchart" or func == ".chart":
-        return "http://chiptuneswin.com/chipchart"
+    elif func == ".chipchart" or func == ".chart" or func == ".index" or func == ".chipwindex":
+        return "http://chiptuneswin.com/index"
 
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
@@ -876,8 +878,8 @@ while 1:
                 if func == "update" and modflag:
                     updateBamboo()        
 					
-                if func == "sleep" and modflag:
-                    sleepBamboo()
+                if func == "silent" and modflag:
+                    silenceBamboo()
            
                 elif func == "say" and modflag and arglist != []:
                     anonSay(' '.join(arglist))
