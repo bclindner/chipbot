@@ -339,6 +339,7 @@ def updateBamboo():
     exit(0)
 	
 def silenceBamboo():
+    global silentMode
     silentMode = not silentMode
     if silentMode:
         return "Running in silent mode!"
