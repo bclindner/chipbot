@@ -339,7 +339,8 @@ def updateBamboo():
     exit(0)
 	
 def silenceBamboo():
-    silentMode = True
+    silentMode = not silentMode
+    anonSay("Running in silent mode!")
 
 def searchGoogle(searchTerm, searchUrl):
     global googlekey
