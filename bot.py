@@ -735,6 +735,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".slam":
         return "comeonandsl.am"
 
+    elif func == ".csi":
+        return "instantcsi.com"
+
     elif func == ".flip":
         return unicode("(╯°□°）╯︵ ┻━┻", 'utf-8')
 
