@@ -798,7 +798,10 @@ def computeResponse(sender, message, channel, ogsender=None):
         return resetalias(ogsender)
 
     elif re.findall('htt.*\.com', message)!= []:
-        url = re.findall('htt.*\.com[^ ]*[^ ]', message)[0]
+        try:
+            url = re.findall('htt.*\.com[^ ]*[^ ]', message)[0]
+        except IndexError:
+            return
         url.decode('utf-8')
 
         # Problem with gifs, hacky fix for now
