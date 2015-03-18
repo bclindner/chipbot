@@ -498,8 +498,11 @@ def parseURL(url):
     except UnicodeEncodeError:
         return
     title = soup.find('title')
-
-    return title.renderContents().decode('utf-8')
+    
+    if title is None:
+        return
+    else:
+        return title.renderContents().decode('utf-8')
 
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel, ogsender=None):
