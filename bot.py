@@ -592,7 +592,8 @@ def computeResponse(sender, message, channel, ogsender=None):
             return "%s has %i karma" % (subject, getPoints(subject))
         else:
             # Utter stupidity here (other m sucks)
-            if message.lstrip().lower() == 'other m' and netgain == 1:
+            if (message.lstrip().lower() == 'other m' or message.lstrip().lower() == 'metroid: other m') \
+                and netgain == 1:
                 global otherm
                 return random.choice(otherm)
             setPoints(message.lstrip(), netgain)
