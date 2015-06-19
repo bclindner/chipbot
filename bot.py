@@ -742,6 +742,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".csi":
         return "instantcsi.com"
 
+    elif func == ".jdi":
+        return "https://www.youtube.com/watch?v=24CPil1scVg"
+
     elif func == ".flip":
         return unicode("(╯°□°）╯︵ ┻━┻", 'utf-8')
 
