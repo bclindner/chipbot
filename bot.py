@@ -504,6 +504,21 @@ def parseURL(url):
     else:
         return title.renderContents().decode('utf-8')
 
+# returns text from radio output
+def getRadioInfo(url):
+    br = mechanize.Browser()
+    try:
+        res = br.open(url)
+        data = res.get_data()
+    except (UnicodeEncodeError, mechanize._mechanize.BrowserStateError, urllib2.URLError) as e:
+        return
+
+    if data is None:
+        return
+    else:
+        return data
+    
+
 # returns the response given a sender, message, and channel
 def computeResponse(sender, message, channel, ogsender=None):
     global args
@@ -726,6 +741,9 @@ def computeResponse(sender, message, channel, ogsender=None):
 
     elif func == ".chipchart" or func == ".chart" or func == ".index" or func == ".chipwindex":
         return "http://chiptuneswin.com/index"
+
+    elif func == ".gbr" or func == ".geekbeatradio":
+        return getRadioInfo('http://geekbeatradio.com/stream/info.txt')
 
     elif func == ".meow":
         return "https://soundcloud.com/anamanaguchi/meow-1"
