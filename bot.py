@@ -781,6 +781,12 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".doubleflip":
         return unicode("┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻", 'utf-8')
 
+    elif func == ".nofucks":
+        return unicode("ᕕ(ᐛ)ᕗ", "utf-8")
+
+    elif func == ".shruggie":
+        return unicode("¯\_(ツ)_/¯", "utf-8")
+
     elif func == ".roll":
         spltmsg = message.split(' ')
         if len(spltmsg) > 1:
