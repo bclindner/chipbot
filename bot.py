@@ -787,6 +787,9 @@ def computeResponse(sender, message, channel, ogsender=None):
     elif func == ".shruggie":
         return unicode("¯\_(ツ)_/¯", "utf-8")
 
+    elif func == ".fiteme":
+        return unicode("ᕙ( •̀ ︿•́ )ᕗ", "utf-8")
+
     elif func == ".roll":
         spltmsg = message.split(' ')
         if len(spltmsg) > 1:
