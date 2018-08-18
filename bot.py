@@ -557,13 +557,15 @@ def computeResponse(sender, message, channel, ogsender=None):
 
     # if the ++/-- operator is present at the end of the line
     if message[-2:] in ["++", "--", "~~", "``", "**", "$$"]:
+        # process the subject: isolate ++/-- and clean up message
         symbol = message[-2:]
         message = message[:-2].rstrip().lstrip()
+        # process the subject: if chipbridge, then only take the stuff after the ">"
+        if sender == "chipbridge": message = message.split('>')[1].rstrip().lstrip()
 
-        
         # determine how many points to give/take
         netgain = int(symbol=="++") - int(symbol=="--")
-        
+
         subject = message.split()
         if subject:
             subject = subject[-1]
